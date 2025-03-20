@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Tournament</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 0, 0, 0.1);
+            box-shadow: 0 0 15px red;
+        }
+
+        input, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn {
+            background: red;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: yellow;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Register for <span id="tournament-name">Free Fire Tournament</span></h1>
+        <p><strong>Date:</strong> <span id="tournament-date">March 30, 2025</span></p>
+        <p><strong>Entry Fee:</strong> ₹<span id="tournament-fee">100</span></p>
+        <img id="tournament-image" src="" width="100%" style="border-radius: 10px;">
+
+        <form id="registration-form">
+            <input type="text" id="player-name" placeholder="Your In-Game Name" required>
+            <input type="email" id="player-email" placeholder="Your Email" required>
+
+            <div id="payment-section">
+                <p><strong>Pay via UPI:</strong> 
+                    <a href="upi://pay?pa=8789297252@ptyes&pn=Tournament Entry&mc=&tid=&tr=&tn=Tournament%20Entry%20Fee&am=100&cu=INR" 
+                       style="color: yellow; text-decoration: none;" target="_blank">
+                        Click to Pay via UPI
+                    </a>
+                </p>
+                <input type="text" id="txn-id" placeholder="Enter Transaction ID " required>
+            </div>
+
+            <button type="submit" class="btn">Confirm Registration</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registration-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const playerName = document.getElementById("player-name").value;
+            const playerEmail = document.getElementById("player-email").value;
+            const transactionId = document.getElementById("txn-id").value.trim();
+
+            if (transactionId.length < 10) {
+                alert("❌ Please enter a valid Transaction ID (at least 10 characters).");
+                return;
+            }
+
+            // Open default email app with registration details
+            const subject = "Tournament Registration - Free Fire";
+            const body = `Player Name: ${playerName}%0D%0AEmail: ${playerEmail}%0D%0ATransaction ID: ${transactionId}%0D%0A`;
+            window.location.href = `mailto:vishalkumar221285@gmail.com?subject=${subject}&body=${body}`;
+
+            alert("✅ Registration request sent! Check your email for confirmation.");
+        });
+    </script>
+</body>
+</html>
