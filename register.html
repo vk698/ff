@@ -61,7 +61,7 @@
 
             <div id="payment-section" class="hidden">
                 <p><strong>Pay via UPI:</strong> <a href="#" id="upi-link" target="_blank">Click here to Pay</a></p>
-                <input type="text" id="txn-id" placeholder="Enter Transaction ID (Min 10 chars)">
+                <input type="text" id="txn-id" placeholder="Enter Transaction ID">
                 <button type="button" class="btn" onclick="verifyPayment()">Verify Payment</button>
                 <p id="payment-status" style="color: yellow;"></p>
             </div>
@@ -102,7 +102,7 @@
             const paymentStatus = document.getElementById("payment-status");
 
             if (txnId.length < 10) {
-                paymentStatus.innerHTML = "❌ Invalid Transaction ID ";
+                paymentStatus.innerHTML = "❌ Invalid Transaction ID (Min 10 chars)";
                 confirmBtn.disabled = true;
             } else {
                 paymentStatus.innerHTML = "✅ Payment Verified!";
