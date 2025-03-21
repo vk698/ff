@@ -62,11 +62,9 @@
             <div id="payment-section" class="hidden">
                 <p><strong>Pay via UPI:</strong> <a href="#" id="upi-link" target="_blank">Click here to Pay</a></p>
                 <input type="text" id="txn-id" placeholder="Enter Transaction ID">
-                <button type="button" class="btn" onclick="verifyPayment()">Verify Payment</button>
-                <p id="payment-status" style="color: yellow;"></p>
             </div>
 
-            <button type="submit" class="btn" id="confirm-btn">Confirm Registration</button>
+            <button type="submit" class="btn">Confirm Registration & Verify Payment</button>
         </form>
     </div>
 
@@ -85,30 +83,17 @@
 
             const paymentSection = document.getElementById("payment-section");
             const txnIdInput = document.getElementById("txn-id");
-            const confirmBtn = document.getElementById("confirm-btn");
             const upiLink = document.getElementById("upi-link");
             upiLink.href = "upi://pay?pa=8789297252@ptyes&pn=Tournament&cu=INR";
 
             if (tournamentFee > 0) {
                 paymentSection.classList.remove("hidden");
                 txnIdInput.required = true;
-                confirmBtn.disabled = true;
+            } else {
+                paymentSection.classList.add("hidden");
+                txnIdInput.required = false;
             }
         });
-
-        function verifyPayment() {
-            const txnId = document.getElementById("txn-id").value.trim();
-            const confirmBtn = document.getElementById("confirm-btn");
-            const paymentStatus = document.getElementById("payment-status");
-
-            if (txnId.length < 10) {
-                paymentStatus.innerHTML = "❌ Invalid Transaction ID (Min 10 chars)";
-                confirmBtn.disabled = true;
-            } else {
-                paymentStatus.innerHTML = "✅ Payment Verified!";
-                confirmBtn.disabled = false;
-            }
-        }
 
         document.getElementById("registration-form").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -116,12 +101,12 @@
             const playerName = document.getElementById("player-name").value.trim();
             const playerEmail = document.getElementById("player-email").value.trim();
             const tournamentFee = parseInt(document.getElementById("tournament-fee").textContent.trim());
-            let transactionId = "";
+            let transactionId = "N/A";
 
             if (tournamentFee > 0) {
                 transactionId = document.getElementById("txn-id").value.trim();
                 if (transactionId.length < 10) {
-                    alert("❌ Payment verification required.");
+                    alert("❌ Invalid Transaction ID (Min 10 chars)");
                     return;
                 }
             }
@@ -131,12 +116,12 @@
                 Name: ${playerName}%0D%0A
                 Email: ${playerEmail}%0D%0A
                 Entry Fee: ₹${tournamentFee}%0D%0A
-                Transaction ID: ${transactionId || "N/A"}%0D%0A
+                Transaction ID: ${transactionId}%0D%0A
                 Thanks!`;
 
             window.location.href = mailtoLink;
 
-            alert(`✅ Registration Successful!\n\nName: ${playerName}\nEmail: ${playerEmail}\nTournament Fee: ₹${tournamentFee}\nTransaction ID: ${transactionId || "N/A"}`);
+            alert(`✅ Registration & Payment Submitted!\n\nName: ${playerName}\nEmail: ${playerEmail}\nTournament Fee: ₹${tournamentFee}\nTransaction ID: ${transactionId}\n\nYou will receive confirmation via Gmail.`);
         });
     </script>
 </body>
