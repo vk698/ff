@@ -134,7 +134,7 @@
                     name: `Free Tournament ${i + 1}`,
                     date: `2025-04-${10 + i + 1} 18:00:00`,
                     fee: 0,
-                    prize: 500 + (i * 100),
+                    prize: 25,
                     id: `FREE${i + 1}FF`,
                     type: "free",
                     image: "ff1.jpeg"
@@ -156,6 +156,10 @@
             tournamentList.innerHTML = "";
             
             tournaments.forEach((tournament) => {
+                let firstPrize = tournament.type === "free" ? 25 : Math.round(tournament.prize * 0.5);
+                let secondPrize = tournament.type === "free" ? 0 : Math.round(tournament.prize * 0.3);
+                let thirdPrize = tournament.type === "free" ? 0 : Math.round(tournament.prize * 0.2);
+
                 let div = document.createElement("div");
                 div.classList.add("tournament");
                 div.innerHTML = `
@@ -163,7 +167,11 @@
                     <h2>${tournament.name}</h2>
                     <p><strong>Date:</strong> ${new Date(tournament.date).toLocaleString()}</p>
                     <p><strong>Entry Fee:</strong> ₹${tournament.fee}</p>
-                    <p><strong>Prize:</strong> ₹${tournament.prize}</p>
+                    <p><strong>Total Prize:</strong> ₹${tournament.prize}*</p>
+                    <p><strong>1st Place:</strong> ₹${firstPrize}</p>
+                    <p><strong>2nd Place:</strong> ₹${secondPrize}</p>
+                    <p><strong>3rd Place:</strong> ₹${thirdPrize}</p>
+                    <p style="color: yellow; font-size: 12px;">*Prize amount may vary depending on the number of participants.</p>
                     ${tournament.fee > 0 ? `<a class="btn" href="upi://pay?pa=${upiId}&pn=Tournament&mc=&tid=&tr=&tn=FreeFireTournament&am=${tournament.fee}&cu=INR" target="_blank">Pay Now</a>` : ''}
                     <button class="btn" onclick="register('${tournament.id}', '${tournament.name}', '${tournament.fee}', '${tournament.date}', '${tournament.image}')">Register</button>
                 `;
