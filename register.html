@@ -67,7 +67,7 @@
             <button type="submit" class="btn">Confirm Registration & Verify Payment</button>
         </form>
     </div>
-<script>
+    <script>
     document.addEventListener("DOMContentLoaded", function () {
         const params = new URLSearchParams(window.location.search);
         const tournamentName = params.get("name") || "Free Fire Tournament";
@@ -113,19 +113,25 @@
                 }
             }
     
-            const mailBody = encodeURIComponent(
-                `Tournament Registration\n\n` +
+            const recipientEmail = "vishalkumar2257r@gmail.com"; // 🔹 Ensure recipient email is set
+            const mailSubject = `Tournament Registration (${tournamentName})`;
+            const mailBody = `Tournament Registration\n\n` +
                 `🔹 Tournament: ${tournamentName}\n` +
                 `🔹 Date: ${tournamentDate}\n` +
                 `🔹 Name: ${playerName}\n` +
                 `🔹 Email: ${playerEmail}\n` +
                 `🔹 Entry Fee: ₹${tournamentFee}\n` +
                 `🔹 Transaction ID: ${transactionId}\n\n` +
-                `Thanks!`
-            );
+                `Thanks!`;
     
-            const mailtoLink = `mailto:${encodeURIComponent("vishalkumar2257r@gmail.com")}?subject=${encodeURIComponent(`Tournament Registration (${tournamentName})`)}&body=${mailBody}`;
+            // Encode subject and body
+            const encodedSubject = encodeURIComponent(mailSubject);
+            const encodedBody = encodeURIComponent(mailBody);
     
+            // Force email using JavaScript (Prevents Telegram from removing it)
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodedSubject}&body=${encodedBody}`;
+    
+            // Open in new tab as backup
             try {
                 window.location.href = mailtoLink;
             } catch (error) {
@@ -135,13 +141,6 @@
             alert(`✅ Registration & Payment Submitted!\n\nTournament: ${tournamentName}\nDate: ${tournamentDate}\nName: ${playerName}\nEmail: ${playerEmail}\nTournament Fee: ₹${tournamentFee}\nTransaction ID: ${transactionId}\n\nYou will receive confirmation via Gmail.`);
         });
     });
-    
-    function copyEmail() {
-        const email = "vishalkumar2257r@gmail.com";
-        navigator.clipboard.writeText(email).then(() => {
-            alert("📧 Email copied! Open Gmail and paste it manually.");
-        });
-    }
 </script>    
 </body>
 </html>
