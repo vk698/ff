@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,72 +69,78 @@
         </form>
     </div>
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const params = new URLSearchParams(window.location.search);
-    const tournamentName = params.get("name") || "Free Fire Tournament";
-    const tournamentDate = params.get("date") || "March 30, 2025";
-    const tournamentFee = params.get("fee") ? parseInt(params.get("fee")) : 0;
-    const tournamentImage = params.get("image") || "default.jpg";
-
-    document.getElementById("tournament-name").textContent = tournamentName;
-    document.getElementById("tournament-date").textContent = tournamentDate;
-    document.getElementById("tournament-fee").textContent = tournamentFee;
-    document.getElementById("tournament-image").src = tournamentImage;
-
-    const paymentSection = document.getElementById("payment-section");
-    const txnIdInput = document.getElementById("txn-id");
-    const upiLink = document.getElementById("upi-link");
-    upiLink.href = "upi://pay?pa=8789297252@ptyes&pn=Tournament&cu=INR";
-
-    if (tournamentFee > 0) {
-        paymentSection.classList.remove("hidden");
-        txnIdInput.required = true;
-    } else {
-        paymentSection.classList.add("hidden");
-        txnIdInput.required = false;
-    }
-
-    document.getElementById("registration-form").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const playerName = document.getElementById("player-name").value.trim();
-        const playerEmail = document.getElementById("player-email").value.trim();
-        let transactionId = "N/A";
-
-        if (!playerName || !playerEmail) {
-            alert("❌ Please fill in all required fields!");
-            return;
-        }
-
+    document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+        const tournamentName = params.get("name") || "Free Fire Tournament";
+        const tournamentDate = params.get("date") || "March 30, 2025";
+        const tournamentFee = params.get("fee") ? parseInt(params.get("fee")) : 0;
+        const tournamentImage = params.get("image") || "default.jpg";
+    
+        document.getElementById("tournament-name").textContent = tournamentName;
+        document.getElementById("tournament-date").textContent = tournamentDate;
+        document.getElementById("tournament-fee").textContent = tournamentFee;
+        document.getElementById("tournament-image").src = tournamentImage;
+    
+        const paymentSection = document.getElementById("payment-section");
+        const txnIdInput = document.getElementById("txn-id");
+        const upiLink = document.getElementById("upi-link");
+        upiLink.href = "upi://pay?pa=8789297252@ptyes&pn=Tournament&cu=INR";
+    
         if (tournamentFee > 0) {
-            transactionId = document.getElementById("txn-id").value.trim();
-            if (transactionId.length < 10) {
-                alert("❌ Invalid Transaction ID (Min 10 chars)");
+            paymentSection.classList.remove("hidden");
+            txnIdInput.required = true;
+        } else {
+            paymentSection.classList.add("hidden");
+            txnIdInput.required = false;
+        }
+    
+        document.getElementById("registration-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+    
+            const playerName = document.getElementById("player-name").value.trim();
+            const playerEmail = document.getElementById("player-email").value.trim();
+            let transactionId = "N/A";
+    
+            if (!playerName || !playerEmail) {
+                alert("❌ Please fill in all required fields!");
                 return;
             }
-        }
-
-        const recipientEmail = "vishalkumar2257r@gmail.com"; // ✅ Always set recipient email
-        const mailSubject = `Tournament Registration (${tournamentName})`;
-        const mailBody = `Tournament Registration\n\n` +
-            `🔹 Tournament: ${tournamentName}\n` +
-            `🔹 Date: ${tournamentDate}\n` +
-            `🔹 Name: ${playerName}\n` +
-            `🔹 Email: ${playerEmail}\n` +
-            `🔹 Entry Fee: ₹${tournamentFee}\n` +
-            `🔹 Transaction ID: ${transactionId}\n\n` +
-            `Thanks!`;
-
-        // **Use Gmail Intent (Works on Mobile)**
-        const encodedSubject = encodeURIComponent(mailSubject);
-        const encodedBody = encodeURIComponent(mailBody);
-        const gmailIntentURL = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${recipientEmail}&su=${encodedSubject}&body=${encodedBody}`;
-
-        window.location.href = gmailIntentURL; // ✅ Opens Gmail directly
-
-        alert(`✅ Registration & Payment Submitted!\n\nTournament: ${tournamentName}\nDate: ${tournamentDate}\nName: ${playerName}\nEmail: ${playerEmail}\nTournament Fee: ₹${tournamentFee}\nTransaction ID: ${transactionId}\n\nYou will receive confirmation via Gmail.`);
-    });
-});
+    
+            if (tournamentFee > 0) {
+                transactionId = document.getElementById("txn-id").value.trim();
+                if (transactionId.length < 10) {
+                    alert("❌ Invalid Transaction ID (Min 10 chars)");
+                    return;
+                }
+            }
+    
+            const recipientEmail = "vishalkumar2257r@gmail.com"; // ✅ Always set recipient email
+            const mailSubject = `Tournament Registration (${tournamentName})`;
+            const mailBody = `Tournament Registration\n\n` +
+                `🔹 Tournament: ${tournamentName}\n` +
+                `🔹 Date: ${tournamentDate}\n` +
+                `🔹 Name: ${playerName}\n` +
+                `🔹 Email: ${playerEmail}\n` +
+                `🔹 Entry Fee: ₹${tournamentFee}\n` +
+                `🔹 Transaction ID: ${transactionId}\n\n` +
+                `Thanks!`;
+    
+            // **Force Open in Default Email App Instead of Telegram**
+            const encodedSubject = encodeURIComponent(mailSubject);
+            const encodedBody = encodeURIComponent(mailBody);
+            const mailtoURL = `mailto:${recipientEmail}?subject=${encodedSubject}&body=${encodedBody}`;
+    
+            // **Check if Opened in Telegram & Redirect**
+            if (navigator.userAgent.includes("Telegram")) {
+                alert("⚠️ Please open this in a web browser!");
+                window.open(mailtoURL, "_blank"); // Forces opening in default email client
+            } else {
+                window.location.href = mailtoURL; // Opens in the email app
+            }
+    
+            alert(`✅ Registration & Payment Submitted!\n\nTournament: ${tournamentName}\nDate: ${tournamentDate}\nName: ${playerName}\nEmail: ${playerEmail}\nTournament Fee: ₹${tournamentFee}\nTransaction ID: ${transactionId}\n\nYou will receive confirmation via Gmail.`);
+        });
+    });    
 </script>    
 </body>
 </html>
