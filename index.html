@@ -158,23 +158,34 @@
     </div>
     <script>
         const upiId = "8789297252@ptyes";
-        const tournaments = Array.from({ length: 10 }, (_, i) => (
+        const modes = ["Solo", "Duo", "Squad", "Clash Squad", "Custom Room"];
+        
+        const tournaments = modes.flatMap((mode) => (
             [
                 {
-                    name: `Free Tournament ${i + 1}`,
-                    date: `2025-04-${10 + i + 1} 18:00:00`,
+                    name: `${mode} Free Tournament`,
+                    date: `2025-04-11 18:00:00`,
                     fee: 0,
                     prize: 25,
-                    id: `FREE${i + 1}FF`,
+                    id: `${mode.toUpperCase().replace(/ /g, '')}FREEFF`,
                     type: "free",
                     image: "ff1.jpeg"
                 },
                 {
-                    name: `Paid Tournament ${i + 1}`,
-                    date: `2025-04-${10 + i + 1} 20:00:00`,
-                    fee: 50 + (i * 10),
-                    prize: 1000 + (i * 200),
-                    id: `PAID${i + 1}FF`,
+                    name: `${mode} Paid Tournament 1`,
+                    date: `2025-04-11 20:00:00`,
+                    fee: mode === "Clash Squad" ? 99: 50,
+                    prize: mode === "Clash Squad" ? 180 : 1000,
+                    id: `${mode.toUpperCase().replace(/ /g, '')}PAID1FF`,
+                    type: "paid",
+                    image: "free fire.jpeg"
+                },
+                {
+                    name: `${mode} Paid Tournament 2`,
+                    date: `2025-04-12 20:00:00`,
+                    fee: mode === "Clash Squad" ? 269 : 60,
+                    prize: mode === "Clash Squad" ? 499 : 1200,
+                    id: `${mode.toUpperCase().replace(/ /g, '')}PAID2FF`,
                     type: "paid",
                     image: "free fire.jpeg"
                 }
@@ -186,21 +197,22 @@
             tournamentList.innerHTML = "";
             
             tournaments.forEach((tournament) => {
-                let firstPrize = tournament.type === "free" ? 25 : Math.round(tournament.prize * 0.5);
-                let secondPrize = tournament.type === "free" ? 0 : Math.round(tournament.prize * 0.3);
-                let thirdPrize = tournament.type === "free" ? 0 : Math.round(tournament.prize * 0.2);
+                let firstPrize = tournament.type === "free" ? 25 : (tournament.name.includes("Clash Squad") ? tournament.prize : Math.round(tournament.prize * 0.5));
+                let secondPrize = tournament.type === "free" || tournament.name.includes("Clash Squad") ? 0 : Math.round(tournament.prize * 0.3);
+                let thirdPrize = tournament.type === "free" || tournament.name.includes("Clash Squad") ? 0 : Math.round(tournament.prize * 0.2);
     
                 let div = document.createElement("div");
                 div.classList.add("tournament");
                 div.innerHTML = `
                     <img src="${tournament.image}" alt="Tournament Image">
                     <h2>${tournament.name}</h2>
+                    <p><strong>Mode:</strong> ${tournament.name.split(' ')[0]}</p>
                     <p><strong>Date:</strong> ${new Date(tournament.date).toLocaleString()}</p>
                     <p><strong>Entry Fee:</strong> ₹${tournament.fee}</p>
                     <p><strong>Total Prize:</strong> ₹${tournament.prize}*</p>
                     <p><strong>1st Place:</strong> ₹${firstPrize}</p>
-                    <p><strong>2nd Place:</strong> ₹${secondPrize}</p>
-                    <p><strong>3rd Place:</strong> ₹${thirdPrize}</p>
+                    ${secondPrize > 0 ? `<p><strong>2nd Place:</strong> ₹${secondPrize}</p>` : ''}
+                    ${thirdPrize > 0 ? `<p><strong>3rd Place:</strong> ₹${thirdPrize}</p>` : ''}
                     <p style="color: yellow; font-size: 12px;">*Prize amount may vary depending on the number of participants.</p>
     
                     ${tournament.fee > 0 ? `<button class="btn" onclick="viewDetails('${tournament.id}', ${tournament.prize})">View Details</button>` : ''}
@@ -215,33 +227,6 @@
             });
         }
     
-        function viewDetails(id, totalPrize) {
-            let prizeBreakupDiv = document.getElementById(`prize-breakup-${id}`);
-            let breakdownHTML = "<h3>Prize Breakdown (Based on Participants)</h3>";
-            
-            const participantRanges = [20, 25, 30, 35, 40, 45, 50];
-            const prizeMultipliers = [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
-    
-            participantRanges.forEach((participants, index) => {
-                let prizePool = Math.round(totalPrize * prizeMultipliers[index]);
-                let firstPrize = Math.round(prizePool * 0.5);
-                let secondPrize = Math.round(prizePool * 0.3);
-                let thirdPrize = Math.round(prizePool * 0.2);
-                breakdownHTML += `
-                    <p><strong>${participants} Participants:</strong></p>
-                    <ul>
-                        <li>1st Place: ₹${firstPrize}</li>
-                        <li>2nd Place: ₹${secondPrize}</li>
-                        <li>3rd Place: ₹${thirdPrize}</li>
-                    </ul>
-                    <hr>
-                `;
-            });
-    
-            prizeBreakupDiv.innerHTML = breakdownHTML;
-            prizeBreakupDiv.style.display = prizeBreakupDiv.style.display === "none" ? "block" : "none";
-        }
-    
         function register(id, name, fee, date, image) {
             if (fee > 0) {
                 let confirmPayment = confirm("Please complete the UPI payment before registering. Have you paid?");
@@ -251,7 +236,11 @@
         }
     
         displayTournaments();
-    </script>    
+    </script>
+
+
+    
+    
 </body>
 <footer>
     <p><a href="privacy-policy.html">Privacy Policy</a> | 
