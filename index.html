@@ -23,18 +23,6 @@
     <meta name="twitter:image" content="https://vkboss49264.github.io/ff-tournament-backend/ff1.jpeg">
     
     <title>vk 18 free fire tournament - Battle, Win & Rule the Arena! ⚡</title>
-</head>
-<body>
-
-<footer>
-    <p>
-        <a href="privacy-policy.html">Privacy Policy</a> | 
-        <a href="terms-conditions.html">Terms & Conditions</a> | 
-        <a href="refund-policy.html">Cancellation & Refund</a> | 
-        <a href="shipping-policy.html">Shipping & Delivery</a>
-    </p>
-</footer>
-    <title>🔥 Free Fire Tournament 🔥</title>
     <style>
         @keyframes fireEffect {
             0%, 100% { background: radial-gradient(circle, red, black); }
@@ -141,9 +129,48 @@
             background: yellow;
             color: black;
         }
+
+        /* Telegram redirect notice styles */
+        .telegram-notice {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            z-index: 1000;
+            border-bottom: 3px solid red;
+            text-align: center;
+        }
+        
+        .telegram-notice button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .telegram-notice button:hover {
+            background: yellow;
+            color: black;
+        }
     </style>
 </head>
 <body>
+    <!-- Telegram Redirect Notice -->
+    <div id="telegramNotice" class="telegram-notice">
+        <h3>⚠️ For Best Experience ⚠️</h3>
+        <p>This website works better in your mobile browser. Please open in Chrome/Safari.</p>
+        <button id="openInBrowserBtn">Open in Browser</button>
+        <p>Or tap the 3-dot menu → "Open in Browser"</p>
+    </div>
+
     <div class="fire-bg"></div>
     <div class="lightning"></div>
 
@@ -156,7 +183,33 @@
         <h2>Available Tournaments</h2>
         <div id="tournament-list"></div>
     </div>
+
     <script>
+        // Telegram detection and handling
+        function isTelegramBrowser() {
+            return navigator.userAgent.includes('Telegram');
+        }
+
+        function openInExternalBrowser() {
+            const currentUrl = encodeURIComponent(window.location.href);
+            // Try multiple methods to open in external browser
+            window.open('https://t.me/iv?url=' + currentUrl + '&rhash=abc123', '_blank');
+            window.location.href = 'externalbrowser://' + currentUrl;
+            setTimeout(() => {
+                window.location.href = 'https://vkboss49264.github.io/ff-tournament-backend/';
+            }, 500);
+        }
+
+        // Show notice if in Telegram
+        if (isTelegramBrowser()) {
+            document.getElementById('telegramNotice').style.display = 'block';
+            document.getElementById('openInBrowserBtn').addEventListener('click', openInExternalBrowser);
+            
+            // Try to redirect automatically after 1 second
+            setTimeout(openInExternalBrowser, 1000);
+        }
+
+        // Original tournament code
         const upiId = "8789297252@ptyes";
         const modes = ["Solo", "Duo", "Squad", "Clash Squad", "Custom Room"];
         
@@ -262,7 +315,10 @@
             window.location.href = `register.html?id=${id}&name=${name}&fee=${fee}&date=${date}&image=${image}`;
         }
     
-        displayTournaments();
+        // Only display tournaments if not in Telegram
+        if (!isTelegramBrowser()) {
+            displayTournaments();
+        }
     </script>
 
 </body>
