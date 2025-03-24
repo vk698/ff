@@ -140,7 +140,6 @@
         <h2>Available Tournaments</h2>
         <div id="tournament-list"></div>
     </div>
-
     <script>
         const upiId = "8789297252@ptyes";
         const tournaments = Array.from({ length: 10 }, (_, i) => (
@@ -165,7 +164,7 @@
                 }
             ]
         )).flat();
-
+    
         function displayTournaments() {
             const tournamentList = document.getElementById("tournament-list");
             tournamentList.innerHTML = "";
@@ -174,7 +173,7 @@
                 let firstPrize = tournament.type === "free" ? 25 : Math.round(tournament.prize * 0.5);
                 let secondPrize = tournament.type === "free" ? 0 : Math.round(tournament.prize * 0.3);
                 let thirdPrize = tournament.type === "free" ? 0 : Math.round(tournament.prize * 0.2);
-
+    
                 let div = document.createElement("div");
                 div.classList.add("tournament");
                 div.innerHTML = `
@@ -187,13 +186,46 @@
                     <p><strong>2nd Place:</strong> ₹${secondPrize}</p>
                     <p><strong>3rd Place:</strong> ₹${thirdPrize}</p>
                     <p style="color: yellow; font-size: 12px;">*Prize amount may vary depending on the number of participants.</p>
+    
+                    ${tournament.fee > 0 ? `<button class="btn" onclick="viewDetails('${tournament.id}', ${tournament.prize})">View Details</button>` : ''}
+    
+                    <div id="prize-breakup-${tournament.id}" class="prize-breakup" style="display: none; text-align: left; padding: 10px; border: 1px solid yellow; margin-top: 10px;"></div>
+    
                     ${tournament.fee > 0 ? `<a class="btn" href="upi://pay?pa=${upiId}&pn=Tournament&mc=&tid=&tr=&tn=FreeFireTournament&am=${tournament.fee}&cu=INR" target="_blank">Pay Now</a>` : ''}
+    
                     <button class="btn" onclick="register('${tournament.id}', '${tournament.name}', '${tournament.fee}', '${tournament.date}', '${tournament.image}')">Register</button>
                 `;
                 tournamentList.appendChild(div);
             });
         }
-
+    
+        function viewDetails(id, totalPrize) {
+            let prizeBreakupDiv = document.getElementById(`prize-breakup-${id}`);
+            let breakdownHTML = "<h3>Prize Breakdown (Based on Participants)</h3>";
+            
+            const participantRanges = [20, 25, 30, 35, 40, 45, 50];
+            const prizeMultipliers = [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+    
+            participantRanges.forEach((participants, index) => {
+                let prizePool = Math.round(totalPrize * prizeMultipliers[index]);
+                let firstPrize = Math.round(prizePool * 0.5);
+                let secondPrize = Math.round(prizePool * 0.3);
+                let thirdPrize = Math.round(prizePool * 0.2);
+                breakdownHTML += `
+                    <p><strong>${participants} Participants:</strong></p>
+                    <ul>
+                        <li>1st Place: ₹${firstPrize}</li>
+                        <li>2nd Place: ₹${secondPrize}</li>
+                        <li>3rd Place: ₹${thirdPrize}</li>
+                    </ul>
+                    <hr>
+                `;
+            });
+    
+            prizeBreakupDiv.innerHTML = breakdownHTML;
+            prizeBreakupDiv.style.display = prizeBreakupDiv.style.display === "none" ? "block" : "none";
+        }
+    
         function register(id, name, fee, date, image) {
             if (fee > 0) {
                 let confirmPayment = confirm("Please complete the UPI payment before registering. Have you paid?");
@@ -201,8 +233,8 @@
             }
             window.location.href = `register.html?id=${id}&name=${name}&fee=${fee}&date=${date}&image=${image}`;
         }
-
+    
         displayTournaments();
-    </script>
+    </script>    
 </body>
 </html>
