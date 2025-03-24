@@ -128,17 +128,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const encodedSubject = encodeURIComponent(mailSubject);
         const encodedBody = encodeURIComponent(mailBody);
 
-        // **Force Gmail Web Version (Works in Any Browser & Platform)**
-        const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipientEmail}&su=${encodedSubject}&body=${encodedBody}`;
-
-        // **Use mailto as backup**
+        // **Use a hidden `<a>` tag and force a click**
         const mailtoLink = `mailto:${recipientEmail}?subject=${encodedSubject}&body=${encodedBody}`;
 
-        try {
-            window.open(gmailLink, "_blank"); // Open Gmail
-        } catch (error) {
-            window.location.href = mailtoLink; // Backup mailto link
-        }
+        const emailLink = document.createElement("a");
+        emailLink.href = mailtoLink;
+        emailLink.style.display = "none";
+        document.body.appendChild(emailLink);
+        emailLink.click();
+        document.body.removeChild(emailLink); // Clean up
 
         alert(`✅ Registration & Payment Submitted!\n\nTournament: ${tournamentName}\nDate: ${tournamentDate}\nName: ${playerName}\nEmail: ${playerEmail}\nTournament Fee: ₹${tournamentFee}\nTransaction ID: ${transactionId}\n\nYou will receive confirmation via Gmail.`);
     });
