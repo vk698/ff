@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        const recipientEmail = "vishalkumar2257r@gmail.com"; // ✅ Ensure recipient email is always set
+        const recipientEmail = "vishalkumar2257r@gmail.com"; // ✅ Always set recipient email
         const mailSubject = `Tournament Registration (${tournamentName})`;
         const mailBody = `Tournament Registration\n\n` +
             `🔹 Tournament: ${tournamentName}\n` +
@@ -124,19 +124,12 @@ document.addEventListener("DOMContentLoaded", function () {
             `🔹 Transaction ID: ${transactionId}\n\n` +
             `Thanks!`;
 
-        // Encode subject and body
+        // **Use Gmail Intent (Works on Mobile)**
         const encodedSubject = encodeURIComponent(mailSubject);
         const encodedBody = encodeURIComponent(mailBody);
+        const gmailIntentURL = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${recipientEmail}&su=${encodedSubject}&body=${encodedBody}`;
 
-        // **Use a hidden `<a>` tag and force a click**
-        const mailtoLink = `mailto:${recipientEmail}?subject=${encodedSubject}&body=${encodedBody}`;
-
-        const emailLink = document.createElement("a");
-        emailLink.href = mailtoLink;
-        emailLink.style.display = "none";
-        document.body.appendChild(emailLink);
-        emailLink.click();
-        document.body.removeChild(emailLink); // Clean up
+        window.location.href = gmailIntentURL; // ✅ Opens Gmail directly
 
         alert(`✅ Registration & Payment Submitted!\n\nTournament: ${tournamentName}\nDate: ${tournamentDate}\nName: ${playerName}\nEmail: ${playerEmail}\nTournament Fee: ₹${tournamentFee}\nTransaction ID: ${transactionId}\n\nYou will receive confirmation via Gmail.`);
     });
