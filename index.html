@@ -174,8 +174,8 @@
                 {
                     name: `${mode} Paid Tournament 1`,
                     date: `2025-04-11 20:00:00`,
-                    fee: mode === "Clash Squad" ? 99: 50,
-                    prize: mode === "Clash Squad" ? 180 : 1000,
+                    fee: mode === "Clash Squad" ? 269 : 50,
+                    prize: mode === "Clash Squad" ? 499 : 1000,
                     id: `${mode.toUpperCase().replace(/ /g, '')}PAID1FF`,
                     type: "paid",
                     image: "free fire.jpeg"
@@ -215,7 +215,7 @@
                     ${thirdPrize > 0 ? `<p><strong>3rd Place:</strong> ₹${thirdPrize}</p>` : ''}
                     <p style="color: yellow; font-size: 12px;">*Prize amount may vary depending on the number of participants.</p>
     
-                    ${tournament.fee > 0 ? `<button class="btn" onclick="viewDetails('${tournament.id}', ${tournament.prize})">View Details</button>` : ''}
+                    ${tournament.fee > 0 && !tournament.name.includes("Clash Squad") ? `<button class="btn" onclick="viewDetails('${tournament.id}', ${tournament.prize})">View Details</button>` : ''}
     
                     <div id="prize-breakup-${tournament.id}" class="prize-breakup" style="display: none; text-align: left; padding: 10px; border: 1px solid yellow; margin-top: 10px;"></div>
     
@@ -225,6 +225,33 @@
                 `;
                 tournamentList.appendChild(div);
             });
+        }
+    
+        function viewDetails(id, totalPrize) {
+            let prizeBreakupDiv = document.getElementById(`prize-breakup-${id}`);
+            let breakdownHTML = "<h3>Prize Breakdown (Based on Participants)</h3>";
+            
+            const participantRanges = [20, 25, 30, 35, 40, 45, 50];
+            const prizeMultipliers = [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+    
+            participantRanges.forEach((participants, index) => {
+                let prizePool = Math.round(totalPrize * prizeMultipliers[index]);
+                let firstPrize = Math.round(prizePool * 0.5);
+                let secondPrize = Math.round(prizePool * 0.3);
+                let thirdPrize = Math.round(prizePool * 0.2);
+                breakdownHTML += `
+                    <p><strong>${participants} Participants:</strong></p>
+                    <ul>
+                        <li>1st Place: ₹${firstPrize}</li>
+                        <li>2nd Place: ₹${secondPrize}</li>
+                        <li>3rd Place: ₹${thirdPrize}</li>
+                    </ul>
+                    <hr>
+                `;
+            });
+    
+            prizeBreakupDiv.innerHTML = breakdownHTML;
+            prizeBreakupDiv.style.display = prizeBreakupDiv.style.display === "none" ? "block" : "none";
         }
     
         function register(id, name, fee, date, image) {
@@ -238,9 +265,6 @@
         displayTournaments();
     </script>
 
-
-    
-    
 </body>
 <footer>
     <p><a href="privacy-policy.html">Privacy Policy</a> | 
