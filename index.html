@@ -3,385 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="vk 18 free fire tournament  bring you the ultimate battle experience! Compete with top players, win real cash prizes, and become the champion. Register now!">
-    <meta name="keywords" content="vk 18 free firetournament , FF Esports, FF Tournament Registration, Free Fire Battle, FF Competitive Gaming">
-    <meta name="author" content="Vishal Kumar">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph Meta Tags (For Facebook & Social Media) -->
-    <meta property="og:title" content="vk 18 free fire tournament - Battle, Win & Rule the Arena! ⚡">
-    <meta property="og:description" content="Join VK18 Free Fire Tournaments, compete with top players, and win exciting cash prizes. Register now to become the ultimate champion!">
-    <meta property="og:url" content="https://vkboss49264.github.io/ff-tournament-backend/">
-    <meta property="og:image" content="https://vkboss49264.github.io/ff-tournament-backend/ff1.jpeg">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="vk 18 free fire tournament ">
-    
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="vk 18 free fire tournament  - Battle, Win & Rule the Arena! ⚡">
-    <meta name="twitter:description" content="Join vk 18 free fire tournament , compete with top players, and win exciting cash prizes. Register now to become the ultimate champion!">
-    <meta name="twitter:image" content="https://vkboss49264.github.io/ff-tournament-backend/ff1.jpeg">
-    
-    <title>vk 18 free fire tournament - Battle, Win & Rule the Arena! ⚡</title>
+    <title>VK18 Free Fire Tournaments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @keyframes fireBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        :root {
+            --primary: #FF4655;
+            --secondary: #FFD700;
+            --dark: #0F1923;
+            --light: #FFFFFF;
+            --accent: #00AEFF;
         }
-    
-        @keyframes neonPulse {
-            0% { box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000; }
-            50% { box-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000; }
-            100% { box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000; }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-    
-        @keyframes lightningFlash {
-            0% { opacity: 0; }
-            2% { opacity: 1; }
-            4% { opacity: 0; }
-            50% { opacity: 0; }
-            52% { opacity: 1; }
-            54% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-    
+        
         body {
-            font-family: 'Arial Black', sans-serif;
-            background: linear-gradient(45deg, #1a1a1a, #2a0000, #1a1a1a);
-            background-size: 400% 400%;
-            animation: fireBackground 15s ease infinite;
-            color: #ffffff;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
         }
-    
-        .lightning-effect {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(transparent 90%, rgba(255,255,255,0.2));
-            animation: lightningFlash 8s infinite linear;
-            pointer-events: none;
-            z-index: 0;
+        
+        header {
+            background: linear-gradient(to right, var(--dark), var(--primary), var(--dark));
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 3px solid var(--secondary);
         }
-    
-        .container {
-            position: relative;
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #ff4444;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 68, 68, 0.3);
-            z-index: 1;
-            backdrop-filter: blur(5px);
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-    
-        .navbar {
+        
+        .tagline {
+            font-size: 1rem;
+            color: var(--light);
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        
+        nav {
+            background-color: rgba(15, 25, 35, 0.9);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             display: flex;
             justify-content: center;
             gap: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: var(--primary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .hero {
+            background: url('assets/hero-bg.jpg') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
             margin-bottom: 2rem;
         }
-    
-        .navbar a {
-            padding: 1rem 2rem;
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #ff0000, #ff6a00);
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-    
-        .navbar a::before {
-            content: '';
+        
+        .hero::before {
+            content: "";
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-        }
-    
-        .navbar a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
-        }
-    
-        .navbar a:hover::before {
-            left: 50%;
-        }
-    
-        .tournament {
-            background: rgba(30, 0, 0, 0.8);
-            margin: 2rem 0;
-            padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid #ff4444;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-    
-        .tournament:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
-        }
-    
-        .tournament img {
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 600px;
-            border-radius: 10px;
-            border: 2px solid #ff4444;
-            margin: 1rem 0;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
         }
-    
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
         .btn {
-            background: linear-gradient(45deg, #ff0000, #ff6a00);
+            display: inline-block;
+            background-color: var(--primary);
             color: white;
             padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
             font-weight: bold;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
-            position: relative;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        .tournaments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .tournament-card {
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,70,85,0.3);
+            transition: all 0.3s;
+        }
+        
+        .tournament-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255,70,85,0.2);
+        }
+        
+        .tournament-image {
+            height: 150px;
             overflow: hidden;
         }
-    
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
+        
+        .tournament-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-    
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        
+        .tournament-details {
+            padding: 1.5rem;
         }
-    
-        h1, h2 {
+        
+        .tournament-details h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .tournament-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+        
+        .prize-pool {
+            background-color: rgba(0,174,255,0.1);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .prize-structure {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+        
+        .prize-place {
             text-align: center;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-            margin: 1.5rem 0;
         }
-    
-        h1 {
-            font-size: 2.5rem;
-            color: #ff4444;
-            letter-spacing: 2px;
+        
+        .prize-place p:first-child {
+            font-weight: bold;
+            color: var(--secondary);
         }
-    
-        /* Responsive Design */
+        
+        .tournament-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            flex: 1;
+        }
+        
+        footer {
+            background-color: #0A1018;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+        }
+        
+        .copyright {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 768px) {
-            .container {
-                margin: 1rem;
-                padding: 1rem;
+            nav {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
             }
-    
-            h1 {
+            
+            .hero h1 {
                 font-size: 2rem;
             }
-    
-            .navbar {
-                flex-direction: column;
-                gap: 1rem;
+            
+            .tournaments-grid {
+                grid-template-columns: 1fr;
             }
-    
-            .tournament {
-                padding: 1rem;
-            }
-        }
-    
-        /* Enhanced Lightning Effect */
-        .lightning-bolt {
-            position: fixed;
-            width: 3px;
-            background: linear-gradient(transparent, white, transparent);
-            animation: lightningFlash 8s infinite;
-            opacity: 0;
-            z-index: 0;
         }
     </style>
 </head>
 <body>
-   
-    <div class="lightning-effect"></div>
-    <div class="lightning-bolt" style="left: 20%; height: 100vh; top: -100%;"></div>
-    <div class="lightning-bolt" style="left: 50%; height: 80vh; top: -80%; animation-delay: 2s;"></div>
-    <div class="lightning-bolt" style="left: 70%; height: 120vh; top: -120%; animation-delay: 4s;"></div>
-    <div class="fire-bg"></div>
-    <div class="lightning"></div>
-
-    <div class="navbar">
-        <a href="contact.html">Contact Support</a>
-    </div>
-
+    <header>
+        <div class="logo">VK18 TOURNAMENTS</div>
+        <div class="tagline">Battle for Glory & Win Cash Prizes!</div>
+    </header>
+    
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="my-tournaments.html">My Tournaments</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>FREE FIRE TOURNAMENTS</h1>
+            <p>Compete against the best players and win amazing cash prizes</p>
+            <a href="#tournaments" class="btn">Join Now</a>
+        </div>
+    </section>
+    
     <div class="container">
-        <h1>🔥 Free Fire Tournament 🔥</h1>
-        <h2>Available Tournaments</h2>
-        <div id="tournament-list"></div>
+        <h2 id="tournaments">Upcoming Tournaments</h2>
+        <div class="tournaments-grid" id="tournamentsContainer">
+            <!-- Tournaments will be loaded here by JavaScript -->
+        </div>
     </div>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="refund.html">Refund Policy</a>
+        </div>
+        <p class="copyright">© 2023 VK18 Tournaments. All rights reserved.</p>
+    </footer>
 
     <script>
-        // Telegram detection and handling
-        function isTelegramBrowser() {
-            return navigator.userAgent.includes('Telegram');
-        }
-
-        function openInExternalBrowser() {
-            const currentUrl = encodeURIComponent(window.location.href);
-            // Try multiple methods to open in external browser
-            window.open('https://t.me/iv?url=' + currentUrl + '&rhash=abc123', '_blank');
-            window.location.href = 'externalbrowser://' + currentUrl;
-            setTimeout(() => {
-                window.location.href = 'https://vkboss49264.github.io/ff-tournament-backend/';
-            }, 500);
-        }
-
-        // Show notice if in Telegram
-        if (isTelegramBrowser()) {
-            document.getElementById('telegramNotice').style.display = 'block';
-            document.getElementById('openInBrowserBtn').addEventListener('click', openInExternalBrowser);
-            
-            // Try to redirect automatically after 1 second
-            setTimeout(openInExternalBrowser, 1000);
-        }
-
-        // Original tournament code
-        const upiId = "8789297252@ptyes";
-        const modes = ["Solo", "Duo", "Squad", "Clash Squad", "Custom Room"];
-        
-        const tournaments = modes.flatMap((mode) => (
-            [
-                {
-                    name: `${mode} Free Tournament`,
-                    date: `2025-04-11 18:00:00`,
-                    fee: 0,
-                    prize: 25,
-                    id: `${mode.toUpperCase().replace(/ /g, '')}FREEFF`,
-                    type: "free",
-                    image: "ff1.jpeg"
-                },
-                {
-                    name: `${mode} Paid Tournament 1`,
-                    date: `2025-04-11 20:00:00`,
-                    fee: mode === "Clash Squad" ? 269 : 50,
-                    prize: mode === "Clash Squad" ? 499 : 1000,
-                    id: `${mode.toUpperCase().replace(/ /g, '')}PAID1FF`,
-                    type: "paid",
-                    image: "free fire.jpeg"
-                },
-                {
-                    name: `${mode} Paid Tournament 2`,
-                    date: `2025-04-12 20:00:00`,
-                    fee: mode === "Clash Squad" ? 269 : 60,
-                    prize: mode === "Clash Squad" ? 499 : 1200,
-                    id: `${mode.toUpperCase().replace(/ /g, '')}PAID2FF`,
-                    type: "paid",
-                    image: "free fire.jpeg"
+        // Tournament Data
+        const tournaments = [
+            {
+                id: "solofree1",
+                name: "Solo Free Tournament",
+                date: "2023-12-20T19:00:00",
+                mode: "Solo",
+                fee: 0,
+                prize: 2500,
+                image: "assets/solo-tournament.jpg",
+                participants: 125,
+                maxPlayers: 200,
+                prizeBreakdown: {
+                    first: 1000,
+                    second: 750,
+                    third: 500
                 }
-            ]
-        )).flat();
-    
-        function displayTournaments() {
-            const tournamentList = document.getElementById("tournament-list");
-            tournamentList.innerHTML = "";
-            
-            tournaments.forEach((tournament) => {
-                let firstPrize = tournament.type === "free" ? 25 : (tournament.name.includes("Clash Squad") ? tournament.prize : Math.round(tournament.prize * 0.5));
-                let secondPrize = tournament.type === "free" || tournament.name.includes("Clash Squad") ? 0 : Math.round(tournament.prize * 0.3);
-                let thirdPrize = tournament.type === "free" || tournament.name.includes("Clash Squad") ? 0 : Math.round(tournament.prize * 0.2);
-    
-                let div = document.createElement("div");
-                div.classList.add("tournament");
-                div.innerHTML = `
-                    <img src="${tournament.image}" alt="Tournament Image">
-                    <h2>${tournament.name}</h2>
-                    <p><strong>Mode:</strong> ${tournament.name.split(' ')[0]}</p>
-                    <p><strong>Date:</strong> ${new Date(tournament.date).toLocaleString()}</p>
-                    <p><strong>Entry Fee:</strong> ₹${tournament.fee}</p>
-                    <p><strong>Total Prize:</strong> ₹${tournament.prize}*</p>
-                    <p><strong>1st Place:</strong> ₹${firstPrize}</p>
-                    ${secondPrize > 0 ? `<p><strong>2nd Place:</strong> ₹${secondPrize}</p>` : ''}
-                    ${thirdPrize > 0 ? `<p><strong>3rd Place:</strong> ₹${thirdPrize}</p>` : ''}
-                    <p style="color: yellow; font-size: 12px;">*Prize amount may vary depending on the number of participants.</p>
-    
-                    ${tournament.fee > 0 && !tournament.name.includes("Clash Squad") ? `<button class="btn" onclick="viewDetails('${tournament.id}', ${tournament.prize})">View Details</button>` : ''}
-    
-                    <div id="prize-breakup-${tournament.id}" class="prize-breakup" style="display: none; text-align: left; padding: 10px; border: 1px solid yellow; margin-top: 10px;"></div>
-    
-                    ${tournament.fee > 0 ? `<a class="btn" href="upi://pay?pa=${upiId}&pn=Tournament&mc=&tid=&tr=&tn=FreeFireTournament&am=${tournament.fee}&cu=INR" target="_blank">Pay Now</a>` : ''}
-    
-                    <button class="btn" onclick="register('${tournament.id}', '${tournament.name}', '${tournament.fee}', '${tournament.date}', '${tournament.image}')">Register</button>
-                `;
-                tournamentList.appendChild(div);
-            });
-        }
-    
-        function viewDetails(id, totalPrize) {
-            let prizeBreakupDiv = document.getElementById(`prize-breakup-${id}`);
-            let breakdownHTML = "<h3>Prize Breakdown (Based on Participants)</h3>";
-            
-            const participantRanges = [20, 25, 30, 35, 40, 45, 50];
-            const prizeMultipliers = [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
-    
-            participantRanges.forEach((participants, index) => {
-                let prizePool = Math.round(totalPrize * prizeMultipliers[index]);
-                let firstPrize = Math.round(prizePool * 0.5);
-                let secondPrize = Math.round(prizePool * 0.3);
-                let thirdPrize = Math.round(prizePool * 0.2);
-                breakdownHTML += `
-                    <p><strong>${participants} Participants:</strong></p>
-                    <ul>
-                        <li>1st Place: ₹${firstPrize}</li>
-                        <li>2nd Place: ₹${secondPrize}</li>
-                        <li>3rd Place: ₹${thirdPrize}</li>
-                    </ul>
-                    <hr>
-                `;
-            });
-    
-            prizeBreakupDiv.innerHTML = breakdownHTML;
-            prizeBreakupDiv.style.display = prizeBreakupDiv.style.display === "none" ? "block" : "none";
-        }
-    
-        function register(id, name, fee, date, image) {
-            if (fee > 0) {
-                let confirmPayment = confirm("Please complete the UPI payment before registering. Have you paid?");
-                if (!confirmPayment) return;
+            },
+            {
+                id: "duopaid1",
+                name: "Duo Paid Tournament",
+                date: "2023-12-21T20:30:00",
+                mode: "Duo",
+                fee: 50,
+                prize: 10000,
+                image: "assets/duo-tournament.jpg",
+                participants: 85,
+                maxPlayers: 100,
+                prizeBreakdown: {
+                    first: 5000,
+                    second: 3000,
+                    third: 2000
+                }
+            },
+            {
+                id: "squadpremium",
+                name: "Squad Premium Tournament",
+                date: "2023-12-22T18:00:00",
+                mode: "Squad",
+                fee: 200,
+                prize: 25000,
+                image: "assets/squad-tournament.jpg",
+                participants: 42,
+                maxPlayers: 50,
+                prizeBreakdown: {
+                    first: 15000,
+                    second: 7000,
+                    third: 3000
+                }
             }
-            window.location.href = `register.html?id=${id}&name=${name}&fee=${fee}&date=${date}&image=${image}`;
-        }
-    
-        // Only display tournaments if not in Telegram
-        if (!isTelegramBrowser()) {
-            displayTournaments();
-        }
-    </script>
+        ];
 
+        // Initialize localStorage
+        if (!localStorage.getItem('tournaments')) {
+            localStorage.setItem('tournaments', JSON.stringify(tournaments));
+        }
+
+        // Display Tournaments
+        function displayTournaments() {
+            const container = document.getElementById('tournamentsContainer');
+            const storedTournaments = JSON.parse(localStorage.getItem('tournaments')) || [];
+            
+            storedTournaments.forEach(tournament => {
+                const card = document.createElement('div');
+                card.className = 'tournament-card';
+                
+                const tournamentDate = new Date(tournament.date);
+                const options = { 
+                    weekday: 'short', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                const formattedDate = tournamentDate.toLocaleDateString('en-IN', options);
+                
+                card.innerHTML = `
+                    <div class="tournament-image">
+                        <img src="${tournament.image}" alt="${tournament.name}">
+                    </div>
+                    <div class="tournament-details">
+                        <h3>${tournament.name}</h3>
+                        <div class="tournament-meta">
+                            <span><i class="fas fa-users"></i> ${tournament.participants}/${tournament.maxPlayers}</span>
+                            <span><i class="fas fa-gamepad"></i> ${tournament.mode}</span>
+                        </div>
+                        <p><strong>Date:</strong> ${formattedDate}</p>
+                        <p><strong>Entry Fee:</strong> ₹${tournament.fee}</p>
+                        
+                        <div class="prize-pool">
+                            <h4>Total Prize Pool: ₹${tournament.prize}</h4>
+                            <div class="prize-structure">
+                                <div class="prize-place">
+                                    <p>1st</p>
+                                    <p>₹${tournament.prizeBreakdown.first}</p>
+                                </div>
+                                <div class="prize-place">
+                                    <p>2nd</p>
+                                    <p>₹${tournament.prizeBreakdown.second}</p>
+                                </div>
+                                <div class="prize-place">
+                                    <p>3rd</p>
+                                    <p>₹${tournament.prizeBreakdown.third}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tournament-actions">
+                            <a href="registration.html?tournamentId=${tournament.id}" class="btn btn-small">Register</a>
+                            <button class="btn btn-small" onclick="viewDetails('${tournament.id}')">Details</button>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // View Tournament Details
+        function viewDetails(tournamentId) {
+            localStorage.setItem('currentTournament', tournamentId);
+            window.location.href = 'tournament-details.html';
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', displayTournaments);
+    </script>
 </body>
-<footer>
-    <p><a href="privacy-policy.html">Privacy Policy</a> | 
-       <a href="terms-conditions.html">Terms & Conditions</a> | 
-       <a href="refund-policy.html">Cancellation & Refund</a> | 
-       <a href="shipping-policy.html">Shipping & Delivery</a>
-    </p>
-</footer>
 </html>
