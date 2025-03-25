@@ -21,162 +21,211 @@
     <meta name="twitter:title" content="vk 18 free fire tournament  - Battle, Win & Rule the Arena! ⚡">
     <meta name="twitter:description" content="Join vk 18 free fire tournament , compete with top players, and win exciting cash prizes. Register now to become the ultimate champion!">
     <meta name="twitter:image" content="https://vkboss49264.github.io/ff-tournament-backend/ff1.jpeg">
-    <footer>
-    <p><a href="privacy-policy.html">Privacy Policy</a> | 
-       <a href="terms-conditions.html">Terms & Conditions</a> | 
-       <a href="refund-policy.html">Cancellation & Refund</a> | 
-       <a href="shipping-policy.html">Shipping & Delivery</a>
-    </p>
-</footer>
+    
     <title>vk 18 free fire tournament - Battle, Win & Rule the Arena! ⚡</title>
     <style>
-        @keyframes fireEffect {
-            0%, 100% { background: radial-gradient(circle, red, black); }
-            50% { background: radial-gradient(circle, orange, black); }
+        @keyframes fireBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-
-        @keyframes lightning {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+    
+        @keyframes neonPulse {
+            0% { box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000; }
+            50% { box-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000; }
+            100% { box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000; }
         }
-
+    
+        @keyframes lightningFlash {
+            0% { opacity: 0; }
+            2% { opacity: 1; }
+            4% { opacity: 0; }
+            50% { opacity: 0; }
+            52% { opacity: 1; }
+            54% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+    
         body {
-            font-family: Arial, sans-serif;
-            background: black;
-            color: white;
-            text-align: center;
-            padding: 20px;
+            font-family: 'Arial Black', sans-serif;
+            background: linear-gradient(45deg, #1a1a1a, #2a0000, #1a1a1a);
+            background-size: 400% 400%;
+            animation: fireBackground 15s ease infinite;
+            color: #ffffff;
+            min-height: 100vh;
             position: relative;
             overflow-x: hidden;
-            overflow-y: auto;
         }
-
-        .fire-bg {
+    
+        .lightning-effect {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            animation: fireEffect 2s infinite alternate;
-            z-index: -2;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 90%, rgba(255,255,255,0.2));
+            animation: lightningFlash 8s infinite linear;
+            pointer-events: none;
+            z-index: 0;
         }
-
-        .lightning {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: url('lightning.png') center/cover no-repeat;
-            animation: lightning 1.5s infinite alternate;
-            z-index: -1;
-            mix-blend-mode: screen;
-        }
-
+    
         .container {
-            width: 90%;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            background: rgba(255, 0, 0, 0.2);
-            box-shadow: 0 0 15px red;
             position: relative;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #ff4444;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 68, 68, 0.3);
+            z-index: 1;
+            backdrop-filter: blur(5px);
         }
-
+    
         .navbar {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
-
+    
         .navbar a {
+            padding: 1rem 2rem;
+            color: #fff;
             text-decoration: none;
-            font-weight: bold;
-            color: white;
-            padding: 10px 15px;
-            background: red;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff0000, #ff6a00);
             border-radius: 5px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-
+    
+        .navbar a::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+    
         .navbar a:hover {
-            background: yellow;
-            color: black;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
         }
-
+    
+        .navbar a:hover::before {
+            left: 50%;
+        }
+    
         .tournament {
-            background: black;
-            margin: 15px 0;
-            padding: 15px;
+            background: rgba(30, 0, 0, 0.8);
+            margin: 2rem 0;
+            padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 0 10px red;
+            border: 1px solid #ff4444;
+            transition: all 0.3s ease;
+            position: relative;
         }
-
+    
+        .tournament:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+        }
+    
         .tournament img {
             width: 100%;
-            max-width: 400px;
+            max-width: 600px;
             border-radius: 10px;
+            border: 2px solid #ff4444;
+            margin: 1rem 0;
         }
-
+    
         .btn {
-            background: red;
+            background: linear-gradient(45deg, #ff0000, #ff6a00);
             color: white;
-            padding: 10px 15px;
+            padding: 0.8rem 1.5rem;
             border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-            margin: 5px;
-        }
-
-        .btn:hover {
-            background: yellow;
-            color: black;
-        }
-
-        /* Telegram redirect notice styles */
-        .telegram-notice {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 20px;
-            z-index: 1000;
-            border-bottom: 3px solid red;
-            text-align: center;
-        }
-        
-        .telegram-notice button {
-            background: red;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .telegram-notice button:hover {
-            background: yellow;
-            color: black;
+    
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+    
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+    
+        h1, h2 {
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            margin: 1.5rem 0;
+        }
+    
+        h1 {
+            font-size: 2.5rem;
+            color: #ff4444;
+            letter-spacing: 2px;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+    
+            h1 {
+                font-size: 2rem;
+            }
+    
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+    
+            .tournament {
+                padding: 1rem;
+            }
+        }
+    
+        /* Enhanced Lightning Effect */
+        .lightning-bolt {
+            position: fixed;
+            width: 3px;
+            background: linear-gradient(transparent, white, transparent);
+            animation: lightningFlash 8s infinite;
+            opacity: 0;
+            z-index: 0;
         }
     </style>
 </head>
 <body>
-    <!-- Telegram Redirect Notice -->
-    <div id="telegramNotice" class="telegram-notice">
-        <h3>⚠️ For Best Experience ⚠️</h3>
-        <p>This website works better in your mobile browser. Please open in Chrome/Safari.</p>
-        <button id="openInBrowserBtn">Open in Browser</button>
-        <p>Or tap the 3-dot menu → "Open in Browser"</p>
-    </div>
-
+   
+    <div class="lightning-effect"></div>
+    <div class="lightning-bolt" style="left: 20%; height: 100vh; top: -100%;"></div>
+    <div class="lightning-bolt" style="left: 50%; height: 80vh; top: -80%; animation-delay: 2s;"></div>
+    <div class="lightning-bolt" style="left: 70%; height: 120vh; top: -120%; animation-delay: 4s;"></div>
     <div class="fire-bg"></div>
     <div class="lightning"></div>
 
