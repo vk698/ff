@@ -264,6 +264,20 @@
             setTimeout(openInExternalBrowser, 1000);
         }
 
+        // Date formatting function
+        function formatIndianDate(dateString) {
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            let hours = date.getHours();
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // Convert 0 to 12
+            return `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
+        }
+
         // Original tournament code
         const upiId = "8789297252@ptyes";
         const modes = ["Solo", "Duo", "Squad", "Clash Squad", "Custom Room"];
@@ -308,27 +322,27 @@
                 let firstPrize = tournament.type === "free" ? 25 : (tournament.name.includes("Clash Squad") ? tournament.prize : Math.round(tournament.prize * 0.5));
                 let secondPrize = tournament.type === "free" || tournament.name.includes("Clash Squad") ? 0 : Math.round(tournament.prize * 0.3);
                 let thirdPrize = tournament.type === "free" || tournament.name.includes("Clash Squad") ? 0 : Math.round(tournament.prize * 0.2);
-    
+
                 let div = document.createElement("div");
                 div.classList.add("tournament");
                 div.innerHTML = `
                     <img src="${tournament.image}" alt="Tournament Image">
                     <h2>${tournament.name}</h2>
                     <p><strong>Mode:</strong> ${tournament.name.split(' ')[0]}</p>
-                    <p><strong>Date:</strong> ${new Date(tournament.date).toLocaleString()}</p>
+                    <p><strong>Date:</strong> ${formatIndianDate(tournament.date)}</p>
                     <p><strong>Entry Fee:</strong> ₹${tournament.fee}</p>
                     <p><strong>Total Prize:</strong> ₹${tournament.prize}*</p>
                     <p><strong>1st Place:</strong> ₹${firstPrize}</p>
                     ${secondPrize > 0 ? `<p><strong>2nd Place:</strong> ₹${secondPrize}</p>` : ''}
                     ${thirdPrize > 0 ? `<p><strong>3rd Place:</strong> ₹${thirdPrize}</p>` : ''}
                     <p style="color: yellow; font-size: 12px;">*Prize amount may vary depending on the number of participants.</p>
-    
+
                     ${tournament.fee > 0 && !tournament.name.includes("Clash Squad") ? `<button class="btn" onclick="viewDetails('${tournament.id}', ${tournament.prize})">View Details</button>` : ''}
-    
+
                     <div id="prize-breakup-${tournament.id}" class="prize-breakup" style="display: none; text-align: left; padding: 10px; border: 1px solid yellow; margin-top: 10px;"></div>
-    
+
                     ${tournament.fee > 0 ? `<a class="btn" href="upi://pay?pa=${upiId}&pn=Tournament&mc=&tid=&tr=&tn=FreeFireTournament&am=${tournament.fee}&cu=INR" target="_blank">Pay Now</a>` : ''}
-    
+
                     <button class="btn" onclick="register('${tournament.id}', '${tournament.name}', '${tournament.fee}', '${tournament.date}', '${tournament.image}')">Register</button>
                 `;
                 tournamentList.appendChild(div);
